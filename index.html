@@ -149,5 +149,20 @@
     setTimeout(()=>toast.style.display='none',3500);
   });
 </script>
-</body>
+<script type="module">
+  import { createClient } from
+    'https://esm.sh/@supabase/supabase-js@2';
+
+  const SUPABASE_URL = 'اینجا_PROJECT_URL';
+  const SUPABASE_PUBLISHABLE_KEY = 'اینجا_PUBLISHABLE_KEY';
+
+  const supabase = createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+  window.supabaseClient = supabase;
+
+  console.log('Supabase آماده اتصال است.');
+</script></body>
 </html>
