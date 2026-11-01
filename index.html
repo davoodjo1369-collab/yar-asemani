@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#075b3c">
+  <title>یار آسمانی | نوجوانان آسمانی</title>
+  <!-- Official Eitaa WebApp SDK; active only inside Eitaa -->
+  <script src="https://developer.eitaa.com/eitaa-web-app.js"></script>
+  <style>
+    :root{--green:#075b3c;--green2:#0b754b;--gold:#f2bd36;--cream:#fffaf0;--ink:#17352a;--muted:#6e8178;--line:#e5eee8}
+    *{box-sizing:border-box}
+    body{margin:0;background:#f3f7f3;color:var(--ink);font-family:Tahoma,"Vazirmatn",Arial,sans-serif}
+    button,input,select,textarea{font:inherit}
+    .app{max-width:520px;margin:auto;min-height:100vh;background:#f8fbf8;padding-bottom:86px}
+    header{background:linear-gradient(135deg,#06472f,#0b7650);color:#fff;padding:22px 18px 26px;border-radius:0 0 26px 26px;position:relative;overflow:hidden}
+    header:after{content:"";position:absolute;width:190px;height:190px;border:1px solid #ffffff22;border-radius:50%;left:-70px;top:-90px;box-shadow:0 0 0 22px #ffffff0d,0 0 0 45px #ffffff08}
+    .top{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+    .logo{width:62px;height:62px;border-radius:18px;object-fit:cover;background:#fff;border:2px solid #f8d66d}
+    .brand{font-size:20px;font-weight:800;margin:0 0 5px}
+    .sub{font-size:12px;color:#d8f0e3}
+    .welcome{margin-top:22px;position:relative;z-index:1}
+    .welcome h1{font-size:21px;margin:0 0 8px}
+    .welcome p{font-size:13px;color:#e2f3e9;margin:0;line-height:1.9}
+    main{padding:18px 15px}
+    .section-head{display:flex;justify-content:space-between;align-items:center;margin:8px 2px 13px}
+    .section-head h2{font-size:16px;margin:0}
+    .hint{font-size:11px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}
+    .tile,.card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:15px;box-shadow:0 3px 12px #143b2510}
+    .tile{min-height:112px;text-align:right;cursor:pointer;color:inherit}
+    .tile .ico{font-size:25px;display:block;margin-bottom:12px}
+    .tile strong{font-size:14px;display:block}
+    .tile small{font-size:11px;color:var(--muted);display:block;margin-top:6px;line-height:1.7}
+    .banner{margin-top:15px;background:linear-gradient(110deg,#fff3ca,#fffaf0);border:1px solid #f4dfa0;border-radius:17px;padding:15px;line-height:1.9}
+    .banner strong{font-size:14px;color:#76520b}
+    .banner p{font-size:12px;margin:5px 0 0;color:#705f3b}
+    .page{display:none}.page.active{display:block}
+    .back{border:0;background:transparent;color:var(--green);font-weight:bold;padding:8px 0;cursor:pointer}
+    .card{margin-bottom:11px}
+    .row{display:flex;justify-content:space-between;gap:12px;align-items:center}
+    .tag{font-size:10px;padding:5px 9px;border-radius:30px;background:#e7f5ec;color:#087448}
+    .program-title{font-weight:bold;font-size:14px}
+    .program-meta{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.8}
+    label{font-size:12px;font-weight:bold;display:block;margin:13px 0 7px}
+    input,select,textarea{width:100%;padding:12px;border:1px solid #dce8df;border-radius:12px;background:#fff;color:var(--ink);outline:none}
+    input:focus,select:focus,textarea:focus{border-color:var(--green2)}
+    .btn{border:0;border-radius:12px;padding:13px 16px;background:var(--green);color:white;font-weight:bold;width:100%;margin-top:16px;cursor:pointer}
+    .btn.secondary{background:#e9f4ed;color:var(--green)}
+    .notice{font-size:11px;line-height:1.9;color:#687a70;background:#f0f5f1;padding:12px;border-radius:12px;margin-top:12px}
+    .empty{font-size:13px;color:var(--muted);line-height:2;text-align:center;padding:25px 12px}
+    nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(520px,100%);background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:10px 4px calc(10px + env(safe-area-inset-bottom));z-index:5}
+    nav button{border:0;background:transparent;color:#73847b;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer}
+    nav button b{font-size:20px;font-weight:400}
+    nav button.active{color:var(--green);font-weight:bold}
+    .toast{position:fixed;bottom:86px;left:50%;transform:translateX(-50%);background:#173d2b;color:white;padding:12px 17px;border-radius:12px;font-size:12px;display:none;z-index:9;max-width:90%;text-align:center}
+    footer{text-align:center;color:#8b9a91;font-size:10px;padding:16px}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="top">
+      <img class="logo" src="logo.jpg" alt="لوگوی یار آسمانی" onerror="this.style.display='none'">
+      <div><p class="brand">یار آسمانی 🌱</p><div class="sub">سامانه نوجوانان آسمانی · مسجدالمهدی(عج)</div></div>
+    </div>
+    <div class="welcome">
+      <h1>به جمع یاران آسمانی خوش آمدی!</h1>
+      <p>اینجا می‌توانی برنامه‌ها را ببینی و برای فعالیت‌های مجموعه درخواست ثبت‌نام بفرستی.</p>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="page active">
+      <div class="section-head"><h2>دسترسی سریع</h2><span class="hint">همراه هم، رو به رشد</span></div>
+      <div class="grid">
+        <button class="tile" onclick="showPage('programs')"><span class="ico">📅</span><strong>برنامه‌ها و کلاس‌ها</strong><small>مشاهده برنامه‌های پیش‌رو</small></button>
+        <button class="tile" onclick="showPage('register')"><span class="ico">📝</span><strong>درخواست ثبت‌نام</strong><small>ارسال درخواست برای فعالیت‌ها</small></button>
+        <button class="tile" onclick="showPage('attendance')"><span class="ico">⭐</span><strong>حضور و امتیازها</strong><small>در نسخه‌های بعدی فعال می‌شود</small></button>
+        <button class="tile" onclick="showPage('about')"><span class="ico">🕌</span><strong>درباره مجموعه</strong><small>آشنایی با نوجوانان آسمانی</small></button>
+      </div>
+      <div class="banner"><strong>🌿 قدم‌به‌قدم تا رشد و رفاقت</strong><p>در برنامه‌های فرهنگی، قرآنی، ورزشی و گروهی نوجوانان آسمانی همراه ما باش.</p></div>
+      <div class="section-head" style="margin-top:22px"><h2>اطلاعیه‌ها</h2><span class="hint">نمونه نمایشی</span></div>
+      <div class="card"><div class="program-title">به‌زودی؛ برنامه‌های جدید مجموعه</div><div class="program-meta">برای اطلاع از زمان و جزئیات برنامه‌ها، اطلاعیه‌های رسمی مجموعه را دنبال کنید.</div></div>
+    </section>
+
+    <section id="programs" class="page">
+      <button class="back" onclick="showPage('home')">← بازگشت به خانه</button>
+      <div class="section-head"><h2>برنامه‌ها و فعالیت‌ها</h2><span class="hint">نمونه اولیه</span></div>
+      <div class="card"><div class="row"><div class="program-title">📖 محفل قرآنی</div><span class="tag">فرهنگی</span></div><div class="program-meta">روخوانی، روان‌خوانی و انس با قرآن<br>زمان و ظرفیت: متعاقباً اعلام می‌شود</div></div>
+      <div class="card"><div class="row"><div class="program-title">⚽ فعالیت‌های ورزشی</div><span class="tag">ورزشی</span></div><div class="program-meta">فوتسال، هندبال و سایر فعالیت‌ها<br>زمان و ظرفیت: متعاقباً اعلام می‌شود</div></div>
+      <div class="card"><div class="row"><div class="program-title">🎭 کارگاه‌های مهارتی و هنری</div><span class="tag">مهارتی</span></div><div class="program-meta">نمایش، سرود، بازی و زندگی و کارگاه‌های آموزشی</div></div>
+      <div class="notice">این موارد نمونه هستند. برنامه‌ها، تاریخ‌ها و ظرفیت واقعی باید توسط مدیر مجموعه تأیید و وارد شوند.</div>
+    </section>
+
+    <section id="register" class="page">
+      <button class="back" onclick="showPage('home')">← بازگشت به خانه</button>
+      <div class="section-head"><h2>درخواست ثبت‌نام</h2></div>
+      <div class="card">
+        <div class="notice">این نسخه فقط پیش‌نمایش است؛ اطلاعات این فرم به جایی ارسال یا ذخیره نمی‌شود. در نسخه نهایی، ثبت‌نام با اطلاع و تأیید والدین و دسترسی امن انجام خواهد شد.</div>
+        <form id="demoForm">
+          <label for="fullname">نام و نام خانوادگی</label>
+          <input id="fullname" required maxlength="70" placeholder="نام شرکت‌کننده">
+          <label for="group">پایه تحصیلی</label>
+          <select id="group" required><option value="">انتخاب کنید</option><option>سوم ابتدایی</option><option>چهارم ابتدایی</option><option>پنجم ابتدایی</option><option>ششم ابتدایی</option><option>متوسطه اول</option><option>متوسطه دوم</option></select>
+          <label for="activity">فعالیت موردنظر</label>
+          <select id="activity" required><option value="">انتخاب کنید</option><option>فعالیت قرآنی</option><option>فوتسال و ورزش</option><option>سرود و فعالیت هنری</option><option>کارگاه مهارتی</option><option>سایر</option></select>
+          <button class="btn" type="submit">ثبت آزمایشی درخواست</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="attendance" class="page">
+      <button class="back" onclick="showPage('home')">← بازگشت به خانه</button>
+      <div class="section-head"><h2>حضور و امتیازها</h2></div>
+      <div class="card empty">⭐ این بخش در مرحله بعد، پس از طراحی سطح دسترسی مربیان و ثبت امن اطلاعات، فعال خواهد شد.</div>
+    </section>
+
+    <section id="about" class="page">
+      <button class="back" onclick="showPage('home')">← بازگشت به خانه</button>
+      <div class="section-head"><h2>درباره یار آسمانی</h2></div>
+      <div class="card">
+        <div class="program-title">نوجوانان آسمانی | مسجدالمهدی(عج)</div>
+        <div class="program-meta">یار آسمانی، بستری برای آشنایی با برنامه‌ها و فعالیت‌های مسجد نوجوانانه و همراهی در مسیر رشد، یادگیری، معنویت و رفاقت است.</div>
+      </div>
+      <div class="notice">اطلاعات تماس، نشانی مسجد و راه ارتباطی رسمی پس از تأیید مدیر مجموعه در این بخش قرار می‌گیرد.</div>
+    </section>
+  </main>
+  <footer>نسخه نمایشی اولیه · یار آسمانی 🌱</footer>
+  <nav>
+    <button class="active" data-page="home" onclick="showPage('home')"><b>⌂</b>خانه</button>
+    <button data-page="programs" onclick="showPage('programs')"><b>▦</b>برنامه‌ها</button>
+    <button data-page="register" onclick="showPage('register')"><b>＋</b>ثبت‌نام</button>
+    <button data-page="about" onclick="showPage('about')"><b>◉</b>درباره ما</button>
+  </nav>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+  function showPage(id){
+    document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));
+    document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  document.getElementById('demoForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    const toast=document.getElementById('toast');
+    toast.textContent='این فقط پیش‌نمایش است؛ هنوز هیچ اطلاعاتی ارسال یا ذخیره نشد.';
+    toast.style.display='block';
+    setTimeout(()=>toast.style.display='none',3500);
+  });
+</script>
+</body>
+</html>
